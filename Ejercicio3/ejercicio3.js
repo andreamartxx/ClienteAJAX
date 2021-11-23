@@ -10,31 +10,40 @@ window.onload = function(){
 
     document.getElementById("boton").addEventListener("click", ()=>{
 
-        sacardatos(XMLHttpRequestObject);
+        XMLHttpRequestObject.responseType = 'blob';
+
+        //no se puede hacer porque no puede cambiarse el tipo
+
+        sacardatos("imagen2.jpg",XMLHttpRequestObject);
 
     });
 
 }
 
-function sacardatos(XMLHttpRequestObject){
+    function sacardatos(datos, XMLHttpRequestObject){
 
-    if(XMLHttpRequestObject){
+        XMLHttpRequestObject.responseType = 'blob';
 
-        var lugar = document.getElementById("imagen");
+        if(XMLHttpRequestObject){
 
-        XMLHttpRequestObject.open("GET", "imagen2.jpg");
+            var lugar = document.getElementById("imagen");
 
-        XMLHttpRequestObject.onreadystatechange = ()=>{
-            
-            if(XMLHttpRequestObject.readyState == 4 && XMLHttpRequestObject.status == 200){
+            XMLHttpRequestObject.open("GET", datos);
 
-                lugar.src = XMLHttpRequestObject.responseText;
+            XMLHttpRequestObject.onreadystatechange = ()=>{
+                
+                if(XMLHttpRequestObject.readyState == 4 && XMLHttpRequestObject.status == 200){
 
+                    var blob = XMLHttpRequestObject.response;
+                    
+                    lugar.src = window.URL.createObjectURL(blob);
+
+                }
+                
             }
-            
+
         }
 
         XMLHttpRequestObject.send(null);
-    }
 
-}
+    }
