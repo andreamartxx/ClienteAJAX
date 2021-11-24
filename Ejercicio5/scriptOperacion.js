@@ -2,6 +2,6 @@
 
     var y = 50;
 
-    var resultado = eval("x+y");
+    var resultado = x+y;
 
-    document.getElementById("contenido").innerHTML = resultado;    
+    alert(resultado);

@@ -10,7 +10,7 @@ window.onload = function(){
 
     document.getElementById("boton").addEventListener("click", ()=>{
 
-        sacardatos("scriptOperacion.js", XMLHttpRequestObject);
+        sacardatos("ej6.php", XMLHttpRequestObject);
 
     });
 
@@ -21,7 +21,7 @@ function sacardatos(datos, XMLHttpRequestObject){
 
     if(XMLHttpRequestObject){
 
-        document.getElementById("contenido");
+        var lugar = document.getElementById("contenido");
 
         XMLHttpRequestObject.open("GET", datos);
 
@@ -29,7 +29,7 @@ function sacardatos(datos, XMLHttpRequestObject){
             
             if(XMLHttpRequestObject.readyState == 4 && XMLHttpRequestObject.status == 200){
 
-                eval(XMLHttpRequestObject.responseText);
+                lugar.innerHTML = XMLHttpRequestObject.responseText;
 
             }
             
