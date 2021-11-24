@@ -10,9 +10,10 @@ window.onload = function(){
 
     document.getElementById("boton").addEventListener("click", ()=>{
 
-        sacardatos('libros.xml', XMLHttpRequestObject);
+        sacardatos("scriptOperacion.js", XMLHttpRequestObject);
 
     });
+
 
 }
 
@@ -27,20 +28,6 @@ function sacardatos(datos, XMLHttpRequestObject){
         XMLHttpRequestObject.onreadystatechange = ()=>{
             
             if(XMLHttpRequestObject.readyState == 4 && XMLHttpRequestObject.status == 200){
-
-                var documentoXml = XMLHttpRequestObject.responseXML;
-
-                txt = "";
-
-                elemento = documentoXml.getElementsByTagName("Obras_literarias")
-
-                //recorrer todos los elementos del documento XMl
-
-                for(var i = 0; i < elemento.length; i++){ 
-
-                    txt += elemento[i].childNodes[0].nodeValue + '"<br>"';
-                  
-                }
 
                 lugar.innerHTML = XMLHttpRequestObject.responseText;
 
