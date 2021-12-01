@@ -21,7 +21,7 @@ function sacardatos(datos, XMLHttpRequestObject){
 
     if(XMLHttpRequestObject){
 
-        var lugar = document.getElementById("contenido");
+        var lugar = document.getElementById("contenedor");
 
         XMLHttpRequestObject.open("GET", datos);
 
