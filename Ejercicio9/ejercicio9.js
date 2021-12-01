@@ -8,9 +8,9 @@ window.onload = function(){
         XMLHttpRequestObject = new XMLHttpRequest();
     }
 
-    document.getElementById("botonGet").addEventListener("click", ()=>{
+    document.getElementById("botonGif").addEventListener("click", ()=>{
 
-        sacardatos("script.php?nombre=&apellido=", XMLHttpRequestObject);
+        sacardatos("archivo.php", XMLHttpRequestObject);
 
     });
 
@@ -23,7 +23,7 @@ function sacardatos(datos, XMLHttpRequestObject){
 
         var lugar = document.getElementById("contenido");
 
-        XMLHttpRequestObject.open("GET", datos+"andrea"+" martin");
+        XMLHttpRequestObject.open("GET", datos);
 
         XMLHttpRequestObject.onreadystatechange = ()=>{
             
