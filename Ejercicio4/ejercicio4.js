@@ -1,54 +1,46 @@
 
-window.onload = function(){
 
-    var XMLHttpRequestObject = false;
+window.addEventListener(`click`, ()=>{
 
-    if (window.XMLHttpRequest) {
+    muestraDatos();
 
-        XMLHttpRequestObject = new XMLHttpRequest();
-    }
+  });
+  
+  function muestraDatos() {
+      
+    let peticionHttp = new XMLHttpRequest();
 
-    document.getElementById("boton").addEventListener("click", ()=>{
+    peticionHttp.onreadystatechange = muestraContenido;
 
-        sacardatos('libros.xml', XMLHttpRequestObject);
+    peticionHttp.open('GET', 'libros.xml');
+    
+    peticionHttp.send(null);
+  
+    function muestraContenido() {
 
-    });
+      if(peticionHttp.readyState == 4) {
 
-}
+        if(peticionHttp.status == 200) {
 
-function sacardatos(datos, XMLHttpRequestObject){
+            var documentoXml = peticionHttp.responseXML;
 
-    if(XMLHttpRequestObject){
+            var root = documentoXml.getElementsByTagName("Obras_literarias")[0];
+          
+            var tope = root.getElementsByTagName("Libro").length;
 
-        var lugar = document.getElementById("contenido");
-
-        XMLHttpRequestObject.open("GET", datos);
-
-        XMLHttpRequestObject.onreadystatechange = ()=>{
-            
-            if(XMLHttpRequestObject.readyState == 4 && XMLHttpRequestObject.status == 200){
-
-                var documentoXml = XMLHttpRequestObject.responseXML;
-
-                txt = "";
-
-                elemento = documentoXml.getElementsByTagName("Obras_literarias")
-
-                //recorrer todos los elementos del documento XMl
-
-                for(var i = 0; i < elemento.length; i++){ 
-
-                    txt += elemento[i].childNodes[0].nodeValue + '"<br>"';
-                  
-                }
-
-                lugar.innerHTML = XMLHttpRequestObject.responseText;
-
-            }
-            
+          for(var i = 0; i < tope; i++){ 
+            libro = root.getElementsByTagName("Libro")[i]; 
+            autor = libro.getElementsByTagName("Autor")[0].firstChild.nodeValue;
+            titulo = libro.getElementsByTagName("Titulo")[0].firstChild.nodeValue;
+            muestraHTML('contenido', "Autor: " + autor + ", Titulo: "+titulo+"<br/>");
+          }
         }
-
-        XMLHttpRequestObject.send(null);
+      }
     }
 
-}
+    function muestraHTML(id, texto){
+      if(document.getElementById){
+        document.getElementById(id).innerHTML += texto;
+      }
+    }
+  }
