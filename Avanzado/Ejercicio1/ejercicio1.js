@@ -1,24 +1,26 @@
 window.addEventListener("load", ()=>{
 
-    var XMLHttpRequestObject = false;
+    let str = "";
 
-    if (window.XMLHttpRequest) {
-
-        XMLHttpRequestObject = new XMLHttpRequest();
-    }
-
-    document.getElementById("enviar").addEventListener("click",()=>{
-        enviarElemento();
+    document.getElementById("selector").addEventListener("change",()=>{
+        enviarElemento(str);
     })
 
 })
 
-    function enviarElemento(){
+    function enviarElemento(str){
+        if (str == "") {
+            document.getElementById("contenido").innerHTML = "";
+            console.log("hola");
 
-        var lista = document.getElementById("selector");
-        var opciones = lista.options[lista.selectedIndex].text;
-        var impresion;
-
-        impresion.innerHTML = "El azulejo seleccionado es: " +opciones;
-
+            return;
+          } else {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() {
+                document.getElementById("contenido").innerHTML = this.responseText;
+            };
+            xmlhttp.open("GET","script.php?q="+str);
+            xmlhttp.send();
+          }
     }
+
