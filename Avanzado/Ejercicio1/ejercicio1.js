@@ -1,10 +1,11 @@
 window.addEventListener("load", ()=>{
 
-    let str = "";
+    var str = "";
     
-    // document.getElementById("selector").addEventListener("change",()=>{
-        enviarElemento(str);
-
+    document.getElementById("selector").addEventListener("change",()=>{
+        //this no funciona
+        enviarElemento(document.getElementById("selector").value);
+    });
 
 })
 
