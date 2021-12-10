@@ -1,18 +1,16 @@
 window.addEventListener("load", ()=>{
 
     let str = "";
-
-    document.getElementById("selector").addEventListener("change",()=>{
+    
+    // document.getElementById("selector").addEventListener("change",()=>{
         enviarElemento(str);
-    })
+
 
 })
 
     function enviarElemento(str){
         if (str == "") {
             document.getElementById("contenido").innerHTML = "";
-            console.log("hola");
-
             return;
           } else {
             var xmlhttp = new XMLHttpRequest();
