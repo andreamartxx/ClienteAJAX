@@ -19,6 +19,8 @@ window.onload = function(){
 
 function sacardatos(XMLHttpRequestObject){
 
+    var mensaje = "";
+
     if(XMLHttpRequestObject){
 
         var lugar = document.getElementById("contenedor");
@@ -45,7 +47,7 @@ function sacardatos(XMLHttpRequestObject){
                 }
                 else {
                    
-                    var mensaje = "NO está disponible el nombre elegido ["+login+"]. Puedes probar con las siguientes alternativas.";
+                    mensaje = "NO está disponible el nombre elegido ["+login+"]. Puedes probar con las siguientes alternativas.";
                     
                     var alternativas = raiz.getElementsByTagName("alternativas")[0];
                     
@@ -65,12 +67,16 @@ function sacardatos(XMLHttpRequestObject){
                 }
             }
 
-            }
-            
         }
-
-        XMLHttpRequestObject.send();
+        
     }
 
+    send(mensaje);
+}
+
+function send(mensaje, XMLHttpRequestObject){
+
+    XMLHttpRequestObject.send();
+}
 
 
